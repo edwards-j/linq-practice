@@ -208,7 +208,7 @@ namespace linq {
 
             var sampleNumbersSquared = wheresSquaredo.TakeWhile (n => Math.Sqrt (n) % 1 != 0);
 
-            foreach (double n in sampleNumbersSquared) {
+            foreach (int n in sampleNumbersSquared) {
                 Console.WriteLine ($"{n}");
             }
             Console.WriteLine ("--------------------");
@@ -239,10 +239,11 @@ namespace linq {
 
             var results = 
                 from c in customers
+                where c.Balance >= 1000000
                 group c by c.Bank into g
                 select new { Bank = g.Key, customers = g };
 
-            Console.WriteLine ("Customers per bank");
+            Console.WriteLine ("Millionaires per bank");
             foreach (var r in results) {
                 Console.WriteLine ($"{r.Bank} {r.customers.Count()}");
             };
